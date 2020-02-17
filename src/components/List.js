@@ -4,6 +4,7 @@ import _ from "lodash";
 import * as actions from "../actions";
 import FoodItem from "../components/food-items/foodItem.component";
 import "./style.css";
+import { EditTextInput } from "../components/food-forms/edittext/edittextInput.component";
 
 class List extends Component {
   state = {
@@ -44,29 +45,19 @@ class List extends Component {
         <div id="todo-add-form" className="col s10 offset-s1">
           <form onSubmit={this.formSubmit}>
             <div className="row">
-              <div className="input-field col s12">
-                <input
-                  value={username}
-                  name="username"
-                  id="username"
-                  type="text"
-                  onChange={this.inputChange}
-                  className="validate"
-                />
-                <label htmlFor="username">Username?</label>
-              </div>
+              <EditTextInput
+                id="username"
+                name="username"
+                // inputChange={this.inputChange}
+                formValue={username}
+              />
 
-              <div className="input-field col s12">
-                <textarea
-                  name="formValue"
-                  value={formValue}
-                  id="meal"
-                  type="text"
-                  onChange={this.inputChange}
-                  className="validate materialize-textarea"
-                />
-                <label htmlFor="meal">Meal</label>
-              </div>
+              <EditTextInput
+                formValue={formValue}
+                name="meal"
+                inputChange={this.inputChange}
+                id="meal"
+              />
 
               <div className="input-field col s12">
                 <input
