@@ -1,22 +1,24 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { completeToDo } from "../../actions/";
+
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {deleteOrder} from '../actions';
 
 class FoodItem extends Component {
-  completeClick = completeTodoId => {
-    const { completeToDo } = this.props;
-    completeToDo(completeTodoId);
+  deleteClick = deleteOrderId => {
+    const {deleteOrder} = this.props;
+    deleteOrder(deleteOrderId);
   };
   render() {
-    const { todoId, todo } = this.props;
+    const{orderId, order} = this.props;
     return (
-      <div key="toDoName" className="col s10 card blue-grey darken-1">
+      <div className="col s10 card blue-grey darken-1">
+
         <div className="card-content white-text ">
-          <h4>{todo.username}</h4>
-          {todo.meal} <br></br>
-          &#8358;{todo.amount}
-          <span
-            onClick={() => this.completeClick(todoId)}
+          <h4>{order.username}</h4>
+          {order.meal} <br></br>
+          &#8358;{order.amount}
+          <span 
+            onClick={() => this.deleteClick(orderId)}
             className="complete-todo-item waves-effect btn"
           >
             <i className="large material-icons">Delete</i>
@@ -27,4 +29,4 @@ class FoodItem extends Component {
   }
 }
 
-export default connect(null, { completeToDo })(FoodItem);
+export default connect(null, {deleteOrder})(FoodItem);
