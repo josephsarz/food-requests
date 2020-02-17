@@ -4,6 +4,7 @@ import _ from 'lodash';
 import * as actions from '../actions';
 import ListItem from './ListItem';
 import "./style.css";
+import Modal from './modal'
 
 class List extends Component {
   state = {
@@ -43,6 +44,7 @@ class List extends Component {
       );
     }
   };
+  
   renderToDo() {
     const {data} = this.props;
     const toDos = _.map(data, (value, key) => {
@@ -53,7 +55,7 @@ class List extends Component {
     }
     return (
       <div className="col s10 offset-s1 center-align">
-        <h4>You have no more things ToDo!</h4>
+        <h4>No Food Request!</h4>
       </div>
     );
   }
@@ -62,6 +64,7 @@ class List extends Component {
   }
   render() {
     const {showForm} = this.state;
+
     return (
       <div className="to-do-list-container">
         <div className="row">
