@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import _ from 'lodash';
-import * as actions from '../actions';
-import ListItem from './ListItem';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import _ from "lodash";
+import * as actions from "../actions";
+import FoodItem from "../components/food-items/foodItem.component";
 import "./style.css";
 
 class List extends Component {
@@ -10,15 +10,16 @@ class List extends Component {
     showForm: false,
     mealValue: "",
     username: "",
-    amount: "",
+    amount: ""
   };
 
   inputChange = event => {
-    const target = event.target
-    const value = target.value
-    const name = target.name
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
     this.setState({
-      [name]: value});
+      [name]: value
+    });
   };
 
   formSubmit = event => {
@@ -31,7 +32,7 @@ class List extends Component {
     this.setState({
       mealValue: "",
       username: "",
-      amount: "",
+      amount: ""
     });
   }; 
 
@@ -44,7 +45,6 @@ class List extends Component {
         <div id="todo-add-form" className="col s10 offset-s1">
           <form onSubmit={this.formSubmit}>
             <div className="row">
-
             <div className="input-field col s12">
               <input 
                 value={username}
@@ -54,7 +54,7 @@ class List extends Component {
                 onChange={this.inputChange}
                 className="validate"
               />
-              <label htmlFor="username">Username?</label>
+              <label htmlFor="username">Username</label>
             </div>
 
             <div className="input-field col s12">
@@ -70,34 +70,38 @@ class List extends Component {
     
             </div>
 
-            <div className="input-field col s12">
-              <input 
-                value={amount}
-                name="amount"
-                id="amount"
-                type="number"
-                onChange={this.inputChange}
-                className="validate"
-              />
-              <label htmlFor="amount">Amount?</label>
-            </div>
+              <div className="input-field col s12">
+                <input
+                  value={amount}
+                  name="amount"
+                  id="amount"
+                  type="number"
+                  onChange={this.inputChange}
+                  className="validate"
+                />
+                <label htmlFor="amount">Amount</label>
+              </div>
 
-            <div className="input-field col s12">
-              <button className="btn waves-effect waves-light" type="submit" name="action">Submit
-              </button>
-            </div>
-
+              <div className="input-field col s12">
+                <button
+                  className="btn waves-effect waves-light"
+                  type="submit"
+                  name="action"
+                >
+                  Submit
+                </button>
+              </div>
             </div>
           </form>
         </div>
       );
     }
   };
-  
+
   renderToDo() {
     const {data} = this.props;
     const orders = _.map(data, (value, key) => {
-      return <ListItem key={key} orderId={key} order={value} />;
+      return <FoodItem key={key} orderId={key} order={value} />;
     });
     if (!_.isEmpty(orders)) {
       return orders;
@@ -112,7 +116,7 @@ class List extends Component {
     this.props.fetchOrders();
   }
   render() {
-    const {showForm} = this.state;
+    const { showForm } = this.state;
 
     return (
       <div className="to-do-list-container">
@@ -121,15 +125,16 @@ class List extends Component {
           {this.renderToDo()}
         </div>
         <div className="fixed-action-btn">
-          <button git
-            onClick={() => this.setState({showForm: !showForm})}
+
+          <button
+            onClick={() => this.setState({ showForm: !showForm })}
             className="btn-floating btn-large teal"
           >
-          {showForm ? (
-            <i className="large material-icons">-</i>
-          ) : (
-            <i className="large material-icons">+</i>
-          )}
+            {showForm ? (
+              <i className="large material-icons">-</i>
+            ) : (
+              <i className="large material-icons">+</i>
+            )}
           </button>
         </div>
       </div>
@@ -137,10 +142,10 @@ class List extends Component {
   }
 }
 
-const mapStateToProps = ({data}) => {
+const mapStateToProps = ({ data }) => {
   return {
     data
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, actions)(List);
