@@ -1,18 +1,18 @@
-import {todosRef} from '../config/firebase';
-import {FETCH_TODOS} from './types';
+import {orderRef} from '../config/firebase';
+import {FETCH_ORDERS} from './types';
 
-export const addToDo = newToDo => async dispatch => {
-  todosRef.push().set(newToDo);
+export const addOrder = newOrder => async dispatch => {
+  orderRef.push().set(newOrder);
 };
 
-export const completeToDo = completeToDoId => async dispatch => {
-  todosRef.child(completeToDoId).remove();
+export const deleteOrder = orderId => async dispatch => {
+  orderRef.child(orderId).remove();
 };
 
-export const fetchToDos = () => async dispatch => {
-  todosRef.on("value", snapshot => {
+export const fetchOrders = () => async dispatch => {
+  orderRef.on("value", snapshot => {
     dispatch({
-      type: FETCH_TODOS,
+      type: FETCH_ORDERS,
       payload: snapshot.val()
     });
   });
