@@ -10,16 +10,20 @@ class ListItem extends Component {
   render() {
     const{todoId, todo} = this.props;
     return (
-      <div key="toDoName" className="col s10 offset-s1 to-do-list-item black">
-        <h4>
-          {todo.title}
+      <div key="toDoName" className="col s10 card blue-grey darken-1">
+
+        <div className="card-content white-text ">
+          <h4>{todo.username}</h4>
+          {todo.meal} <br></br>
+          &#8358;{todo.amount}
           <span 
             onClick={() => this.completeClick(todoId)}
-            className="complete-todo-item waves-effect waves-light blue lighten-5 blue-text text-darken-4 btn"
+            className="complete-todo-item waves-effect btn"
           >
-            <i className="large material-icons">Done</i>
+            <i className="large material-icons">Delete</i>
           </span>
-        </h4>
+        </div>
+      
       </div>
     );
   }
