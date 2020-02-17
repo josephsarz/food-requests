@@ -27,7 +27,7 @@ class List extends Component {
     const {amount} = this.state;
     const {addToDo} = this.props;
     event.preventDefault();
-    addToDo({title: username, meal: formValue, amount: amount});
+    addToDo({username: username, meal: formValue, amount: amount});
     this.setState({
       formValue: "",
       username: "",
