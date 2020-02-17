@@ -8,7 +8,7 @@ import "./style.css";
 class List extends Component {
   state = {
     showForm: false,
-    formValue: "",
+    mealValue: "",
     username: "",
     amount: "",
   };
@@ -22,22 +22,22 @@ class List extends Component {
   };
 
   formSubmit = event => {
-    const {formValue} = this.state;
+    const {mealValue} = this.state;
     const {username} = this.state;
     const {amount} = this.state;
-    const {addToDo} = this.props;
+    const {addOrder} = this.props;
     event.preventDefault();
-    addToDo({title: username, meal: formValue, amount: amount});
+    addOrder({username: username, meal: mealValue, amount: amount});
     this.setState({
-      formValue: "",
+      mealValue: "",
       username: "",
       amount: "",
     });
-  };
+  }; 
 
   renderForm = () => {
 
-    const {showForm, formValue, username, amount} = this.state;
+    const {showForm, mealValue, username, amount} = this.state;
     
     if (showForm) {
       return (
@@ -59,8 +59,8 @@ class List extends Component {
 
             <div className="input-field col s12">
               <textarea
-                name="formValue"
-                value={formValue}
+                name="mealValue"
+                value={mealValue}
                 id="meal"
                 type="text"
                 onChange={this.inputChange}
@@ -96,11 +96,11 @@ class List extends Component {
   
   renderToDo() {
     const {data} = this.props;
-    const toDos = _.map(data, (value, key) => {
-      return <ListItem key={key} todoId={key} todo={value} />;
+    const orders = _.map(data, (value, key) => {
+      return <ListItem key={key} orderId={key} order={value} />;
     });
-    if (!_.isEmpty(toDos)) {
-      return toDos;
+    if (!_.isEmpty(orders)) {
+      return orders;
     }
     return (
       <div className="col s10 offset-s1 center-align">
@@ -109,7 +109,7 @@ class List extends Component {
     );
   }
   componentWillMount() {
-    this.props.fetchToDos();
+    this.props.fetchOrders();
   }
   render() {
     const {showForm} = this.state;
