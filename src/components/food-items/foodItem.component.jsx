@@ -1,8 +1,9 @@
+
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {deleteOrder} from '../actions';
+import {deleteOrder} from '../../actions';
 
-class ListItem extends Component {
+class FoodItem extends Component {
   deleteClick = deleteOrderId => {
     const {deleteOrder} = this.props;
     deleteOrder(deleteOrderId);
@@ -23,10 +24,9 @@ class ListItem extends Component {
             <i className="large material-icons">Delete</i>
           </span>
         </div>
-      
       </div>
     );
   }
 }
 
-export default connect(null, {deleteOrder})(ListItem);
+export default connect(null, {deleteOrder})(FoodItem);
