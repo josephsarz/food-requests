@@ -4,6 +4,7 @@ import _ from "lodash";
 import * as actions from "../actions";
 import FoodItem from "../components/food-items/foodItem.component";
 import "./style.css";
+import { OrderForm } from "../components/food-forms/addForm.component";
 
 class List extends Component {
   state = {
@@ -17,12 +18,19 @@ class List extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
+
     this.setState({
       [name]: value
     });
   };
 
   formSubmit = event => {
+    const { mealValue } = this.state;
+    const { username } = this.state;
+    const { amount } = this.state;
+    const { addOrder } = this.props;
+    event.preventDefault();
+    addOrder({ username: username, meal: mealValue, amount: amount });
     const {mealValue} = this.state;
     const {username} = this.state;
     const {amount} = this.state;
@@ -34,6 +42,20 @@ class List extends Component {
       username: "",
       amount: ""
     });
+  };
+
+  renderForm = () => {
+    const { showForm, mealValue, username, amount } = this.state;
+
+    if (showForm) {
+      return (
+        <OrderForm
+          inputChange={this.inputChange}
+          handledSubmit={this.formSubmit}
+          mealValue={mealValue}
+          username={username}
+          amount={amount}
+        />
   }; 
 
   renderForm = () => {
@@ -125,7 +147,6 @@ class List extends Component {
           {this.renderToDo()}
         </div>
         <div className="fixed-action-btn">
-
           <button
             onClick={() => this.setState({ showForm: !showForm })}
             className="btn-floating btn-large teal"
