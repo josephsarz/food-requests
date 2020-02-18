@@ -4,6 +4,7 @@ import _ from "lodash";
 import * as actions from "../actions";
 import FoodItem from "../components/food-items/foodItem.component";
 import "./style.css";
+import { OrderForm } from "../components/food-forms/addForm.component";
 
 class List extends Component {
   state = {
@@ -17,89 +18,44 @@ class List extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
+
     this.setState({
       [name]: value
     });
   };
 
   formSubmit = event => {
-    const {mealValue} = this.state;
-    const {username} = this.state;
-    const {amount} = this.state;
-    const {addOrder} = this.props;
+    const { mealValue } = this.state;
+    const { username } = this.state;
+    const { amount } = this.state;
+    const { addOrder } = this.props;
     event.preventDefault();
-    addOrder({username: username, meal: mealValue, amount: amount});
+    addOrder({ username: username, meal: mealValue, amount: amount });
     this.setState({
       mealValue: "",
       username: "",
       amount: ""
     });
-  }; 
+  };
 
   renderForm = () => {
+    const { showForm, mealValue, username, amount } = this.state;
 
-    const {showForm, mealValue, username, amount} = this.state;
-    
     if (showForm) {
       return (
-        <div id="todo-add-form" className="col s10 offset-s1">
-          <form onSubmit={this.formSubmit}>
-            <div className="row">
-            <div className="input-field col s12">
-              <input 
-                value={username}
-                name="username"
-                id="username"
-                type="text"
-                onChange={this.inputChange}
-                className="validate"
-              />
-              <label htmlFor="username">Username</label>
-            </div>
-
-            <div className="input-field col s12">
-              <textarea
-                name="mealValue"
-                value={mealValue}
-                id="meal"
-                type="text"
-                onChange={this.inputChange}
-                className="validate materialize-textarea"
-              />
-              <label htmlFor="meal">Meal</label>
-    
-            </div>
-
-              <div className="input-field col s12">
-                <input
-                  value={amount}
-                  name="amount"
-                  id="amount"
-                  type="number"
-                  onChange={this.inputChange}
-                  className="validate"
-                />
-                <label htmlFor="amount">Amount</label>
-              </div>
-
-              <div className="input-field col s12">
-                <button
-                  className="btn waves-effect waves-light"
-                  type="submit"
-                  name="action"
-                >
-                  Submit
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+        <OrderForm
+          inputChange={this.inputChange}
+          handledSubmit={this.formSubmit}
+          mealValue={mealValue}
+          username={username}
+          amount={amount}
+        />
       );
     }
   };
 
   renderToDo() {
-    const {data} = this.props;
+    const { data } = this.props;
     const orders = _.map(data, (value, key) => {
       return <FoodItem key={key} orderId={key} order={value} />;
     });
@@ -125,7 +81,6 @@ class List extends Component {
           {this.renderToDo()}
         </div>
         <div className="fixed-action-btn">
-
           <button
             onClick={() => this.setState({ showForm: !showForm })}
             className="btn-floating btn-large teal"
