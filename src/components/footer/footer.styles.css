@@ -1,0 +1,13 @@
+.profile-links {
+  color: aliceblue;
+  width: 100%;
+  padding: 20px;
+
+  background: darksalmon;
+}
+.copyLink {
+  font-size: 2em;
+  display: block;
+  font-weight: bold;
+  color: black;
+}
