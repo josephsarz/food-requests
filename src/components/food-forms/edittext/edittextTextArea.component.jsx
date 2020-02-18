@@ -1,19 +1,18 @@
 import React from "react";
 
-export const EditTextInput = ({
+export const EditTextArea = ({
   id,
   name,
-  handledType,
   formValue,
   customClassName,
   handledEvent
 }) => (
   <div className="input-field col s12">
-    <input
-      value={formValue}
+    <textarea
       name={name}
+      value={formValue}
       id={id}
-      type={handledType}
+      type="text"
       onChange={handledEvent}
       className={customClassName}
     />

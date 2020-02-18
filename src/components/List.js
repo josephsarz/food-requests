@@ -4,12 +4,12 @@ import _ from "lodash";
 import * as actions from "../actions";
 import FoodItem from "../components/food-items/foodItem.component";
 import "./style.css";
-import { EditTextInput } from "../components/food-forms/edittext/edittextInput.component";
+import { OrderForm } from "../components/food-forms/addForm.component";
 
 class List extends Component {
   state = {
     showForm: false,
-    formValue: "",
+    mealValue: "",
     username: "",
     amount: ""
   };
@@ -18,82 +18,49 @@ class List extends Component {
     const target = event.target;
     const value = target.value;
     const name = target.name;
+
     this.setState({
       [name]: value
     });
   };
 
   formSubmit = event => {
-    const { formValue } = this.state;
+    const { mealValue } = this.state;
     const { username } = this.state;
     const { amount } = this.state;
-    const { addToDo } = this.props;
+    const { addOrder } = this.props;
     event.preventDefault();
-    addToDo({ username: username, meal: formValue, amount: amount });
+    addOrder({ username: username, meal: mealValue, amount: amount });
     this.setState({
-      formValue: "",
+      mealValue: "",
       username: "",
       amount: ""
     });
   };
 
   renderForm = () => {
-    const { showForm, formValue, username, amount } = this.state;
+    const { showForm, mealValue, username, amount } = this.state;
 
     if (showForm) {
       return (
-        <div id="todo-add-form" className="col s10 offset-s1">
-          <form onSubmit={this.formSubmit}>
-            <div className="row">
-              <EditTextInput
-                id="username"
-                name="username"
-                // inputChange={this.inputChange}
-                formValue={username}
-              />
-
-              <EditTextInput
-                formValue={formValue}
-                name="meal"
-                inputChange={this.inputChange}
-                id="meal"
-              />
-
-              <div className="input-field col s12">
-                <input
-                  value={amount}
-                  name="amount"
-                  id="amount"
-                  type="number"
-                  onChange={this.inputChange}
-                  className="validate"
-                />
-                <label htmlFor="amount">Amount?</label>
-              </div>
-
-              <div className="input-field col s12">
-                <button
-                  className="btn waves-effect waves-light"
-                  type="submit"
-                  name="action"
-                >
-                  Submit
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
+        <OrderForm
+          inputChange={this.inputChange}
+          handledSubmit={this.formSubmit}
+          mealValue={mealValue}
+          username={username}
+          amount={amount}
+        />
       );
     }
   };
 
   renderToDo() {
     const { data } = this.props;
-    const toDos = _.map(data, (value, key) => {
-      return <FoodItem key={key} todoId={key} todo={value} />;
+    const orders = _.map(data, (value, key) => {
+      return <FoodItem key={key} orderId={key} order={value} />;
     });
-    if (!_.isEmpty(toDos)) {
-      return toDos;
+    if (!_.isEmpty(orders)) {
+      return orders;
     }
     return (
       <div className="col s10 offset-s1 center-align">
@@ -102,7 +69,7 @@ class List extends Component {
     );
   }
   componentWillMount() {
-    this.props.fetchToDos();
+    this.props.fetchOrders();
   }
   render() {
     const { showForm } = this.state;
