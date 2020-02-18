@@ -4,7 +4,7 @@ import _ from "lodash";
 import * as actions from "../actions";
 import FoodItem from "../components/food-items/foodItem.component";
 import "./style.css";
-import { OrderForm } from "../components/food-forms/addForm.component";
+import Modal from "../components/modals/MakeFoodOrder.component";
 
 class List extends Component {
   state = {
@@ -24,6 +24,11 @@ class List extends Component {
     });
   };
 
+  addedFormDismissed = () => {
+    console.log("added FORM dismissed");
+    this.setState({ showForm: false });
+  };
+
   formSubmit = event => {
     const { mealValue } = this.state;
     const { username } = this.state;
@@ -39,18 +44,11 @@ class List extends Component {
   };
 
   renderForm = () => {
+    console.log("RENDER FORM");
+
     const { showForm, mealValue, username, amount } = this.state;
 
     if (showForm) {
-      return (
-        <OrderForm
-          inputChange={this.inputChange}
-          handledSubmit={this.formSubmit}
-          mealValue={mealValue}
-          username={username}
-          amount={amount}
-        />
-      );
     }
   };
 
@@ -71,19 +69,25 @@ class List extends Component {
   componentWillMount() {
     this.props.fetchOrders();
   }
+
   render() {
     const { showForm } = this.state;
 
     return (
       <div className="to-do-list-container">
         <div className="row">
-          {this.renderForm()}
           {this.renderToDo()}
+          {this.renderForm()}
+          {<Modal handledModalDismissed={this.addedFormDismissed} />}
         </div>
         <div className="fixed-action-btn">
           <button
-            onClick={() => this.setState({ showForm: !showForm })}
-            className="btn-floating btn-large teal"
+            onClick={() => {
+              this.setState({ showForm: !showForm });
+            }}
+            component={<Modal />}
+            className="btn-floating btn-large teal btn modal-trigger "
+            data-target="modal1"
           >
             {showForm ? (
               <i className="large material-icons">-</i>
