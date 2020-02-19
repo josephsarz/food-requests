@@ -9,9 +9,6 @@ import Modal from "../components/modals/MakeFoodOrder.component";
 class List extends Component {
   state = {
     showForm: false,
-    mealValue: "",
-    username: "",
-    amount: ""
   };
 
   inputChange = event => {
@@ -25,7 +22,6 @@ class List extends Component {
   };
 
   addedFormDismissed = () => {
-    console.log("added FORM dismissed");
     this.setState({ showForm: false });
   };
 
@@ -46,7 +42,7 @@ class List extends Component {
   renderForm = () => {
     console.log("RENDER FORM");
 
-    const { showForm, mealValue, username, amount } = this.state;
+    const { showForm } = this.state;
 
     if (showForm) {
     }
@@ -68,7 +64,7 @@ class List extends Component {
   }
   componentWillMount() {
     this.props.fetchOrders();
-  }
+  };
 
   render() {
     const { showForm } = this.state;
