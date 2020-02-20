@@ -43,15 +43,6 @@ class List extends Component {
     });
   };
 
-  renderForm = () => {
-    console.log("RENDER FORM");
-
-    const { showForm, mealValue, username, amount } = this.state;
-
-    if (showForm) {
-    }
-  };
-
   renderToDo() {
     const { data } = this.props;
     const orders = _.map(data, (value, key) => {
@@ -71,14 +62,19 @@ class List extends Component {
   }
 
   render() {
-    const { showForm } = this.state;
+    const { showForm, mealValue, username, amount } = this.state;
 
     return (
       <div className="to-do-list-container">
         <div className="row">
           {this.renderToDo()}
-          {this.renderForm()}
-          {<Modal handledModalDismissed={this.addedFormDismissed} />}
+          {
+            <Modal
+              formValue={mealValue}
+              handledEvent={this.inputChange}
+              handledModalDismissed={this.addedFormDismissed}
+            />
+          }
         </div>
         <div className="fixed-action-btn">
           <button
