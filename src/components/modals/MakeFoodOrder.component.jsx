@@ -2,6 +2,8 @@
 import React, { Component } from "react";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
+import Select from "../modals/select/selectFood.component";
+import { EditTextArea } from "../food-forms/edittext/edittextTextArea.component";
 
 class Modal extends Component {
   componentDidMount() {
@@ -27,6 +29,7 @@ class Modal extends Component {
       endingTop: "10%"
     };
     M.Modal.init(this.Modal, options);
+    console.log(this.props);
   }
 
   render() {
@@ -45,8 +48,31 @@ class Modal extends Component {
                         modal-fixed-footer to the "modal" div*/}
           <div className="modal-content">
             <h4>Order for Owambe</h4>
-            <p>A bunch of text</p>
+            <form className="col s12">
+              <div className="row">
+                <div className="input-field col s6">
+                  <EditTextArea
+                    formValue={this.props.formValue}
+                    name="mealValue"
+                    id="meal"
+                    handledType="text"
+                    handledEvent={this.props.handledEvent}
+                    customClassName="validate materialize-textarea"
+                  />
+                </div>
+                <div className="input-field col s6">
+                  <Select key="amount" orderCategoryName="Select Quantity" />
+                </div>
+              </div>
+
+              <div className="row">
+                <a className="waves-effect waves-light btn">
+                  Add Something else
+                </a>
+              </div>
+            </form>
           </div>
+
           <div className="modal-footer">
             <a href="#" className="modal-close waves-effect waves-red btn-flat">
               Discard
