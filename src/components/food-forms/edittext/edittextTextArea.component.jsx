@@ -16,6 +16,5 @@ export const EditTextArea = ({
       onChange={handledEvent}
       className={customClassName}
     />
-    <label htmlFor={id}> {name}</label>
   </div>
 );

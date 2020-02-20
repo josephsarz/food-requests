@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
@@ -73,10 +74,10 @@ class Modal extends Component {
           </div>
 
           <div className="modal-footer">
-            <a className="modal-close waves-effect waves-red btn-flat">
+            <a href="#" className="modal-close waves-effect waves-red btn-flat">
               Discard
             </a>
-            <a className="modal-close waves-effect waves-green btn-flat">
+            <a href="#" className="modal-close waves-effect waves-green btn-flat">
               Continue
             </a>
           </div>

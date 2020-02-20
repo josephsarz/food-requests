@@ -26,11 +26,29 @@ code {
 
 .content {
   flex: 1 0 auto;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
 .page-footer {
   background-color: teal;
   color: white;
   border-top-color: black;
+}
+
+.profile-links {
+  background-color: black;
+  color: white;
+}
+
+.copyLink {
+  color: white !important;
+}
+
+.nav-wrapper {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.sidenav {
+  background-color: white;
 }
