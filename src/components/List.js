@@ -7,12 +7,12 @@ import * as actions from "../actions";
 import FoodItem from "../components/food-items/foodItem.component";
 import "./style.css";
 import Modal from "../components/modals/MakeFoodOrder.component";
-import Cart from './cart/cart';
+import Cart from "./cart/cart";
 class List extends Component {
   state = {
     showForm: false,
-    display : false,
-    width : 250
+    display: false,
+    width: 250
   };
 
   inputChange = event => {
@@ -66,73 +66,58 @@ class List extends Component {
   }
   componentWillMount() {
     this.props.fetchOrders();
-  };
+  }
 
   render() {
-    const { showForm } = this.state;
-        //   closeNav = () => {
-        //       this.setState({
-        //         width : 0
-        //       });
-        //   },
-        //   openNav = () => {
-        //     this.setState({
-        //       width : 250
-        //     });
-        // };
-
+    const { showForm, mealValue, username, amount } = this.state;
 
     return (
       <React.Fragment>
         <div id="main" className="container-fluid">
-              <nav>
-                  <div className="nav-wrapper black">
-                        <a href="#" className="brand-logo">Food Orders</a>
-                        <ul id="nav-mobile" className="right">
-                           <Cart />
-                        </ul>
-                      </div>
-                </nav>
-
-         
+          <nav>
+            <div className="nav-wrapper black">
+              <a href="#" className="brand-logo">
+                Food Orders
+              </a>
+              <ul id="nav-mobile" className="right">
+                <Cart />
+              </ul>
+            </div>
+          </nav>
         </div>
 
-
-
-
-
-      <div className="container-fluid">
-        <div className="row"></div>
-      </div>
-
-
-
-
-      <div className="to-do-list-container">
-        <div className="row">
-          {this.renderToDo()}
-          {this.renderForm()}
-          {<Modal handledModalDismissed={this.addedFormDismissed} />}
+        <div className="container-fluid">
+          <div className="row"></div>
         </div>
-        <div className="fixed-action-btn">
-          <button
-            onClick={() => {
-              this.setState({ showForm: !showForm });
-            }}
-            component={<Modal />}
-            className="btn-floating btn-large teal btn modal-trigger "
-            data-target="modal1"
-          >
-            {showForm ? (
-              <i className="large material-icons">-</i>
-            ) : (
-              <i className="large material-icons">+</i>
-            )}
-          </button>
-        </div>
-      </div>
 
-        
+        <div className="to-do-list-container">
+          <div className="row">
+            {this.renderToDo()}
+            {
+              <Modal
+                formValue={mealValue}
+                handledEvent={this.inputChange}
+                handledModalDismissed={this.addedFormDismissed}
+              />
+            }
+          </div>
+          <div className="fixed-action-btn">
+            <button
+              onClick={() => {
+                this.setState({ showForm: !showForm });
+              }}
+              component={<Modal />}
+              className="btn-floating btn-large teal btn modal-trigger "
+              data-target="modal1"
+            >
+              {showForm ? (
+                <i className="large material-icons">-</i>
+              ) : (
+                <i className="large material-icons">+</i>
+              )}
+            </button>
+          </div>
+        </div>
       </React.Fragment>
     );
   }
