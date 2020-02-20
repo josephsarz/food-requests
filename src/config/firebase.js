@@ -1,7 +1,7 @@
 import * as firebase from 'firebase'
 
-import {FirebaseConfig} from '../config/keys';
+import {FirebaseConfig} from './keys';
 firebase.initializeApp(FirebaseConfig)
 
 const databaseRef = firebase.database().ref();
-export const orderRef = databaseRef.child("orders")
+export const orderRef = databaseRef.child("orders");

@@ -11,7 +11,7 @@ export const Footer = () => (
       <div className="container">
         <ul>
           <li>
-            <a className href="http://github.com/josephsarz">
+            <a href="http://github.com/josephsarz">
               Femicodes
             </a>
           </li>
