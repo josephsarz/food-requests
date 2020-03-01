@@ -30,17 +30,16 @@ class List extends Component {
   };
 
   formSubmit = event => {
-    const { mealValue } = this.state;
-    const { username } = this.state;
-    const { amount } = this.state;
+    console.log("formSubmit", event);
+
+    const { mealValue, amount, username } = event;
+
     const { addOrder } = this.props;
-    event.preventDefault();
+
+    console.log("username:", username);
+    console.log("mealvalue:", mealValue);
+    console.log("anou:", amount);
     addOrder({ username: username, meal: mealValue, amount: amount });
-    this.setState({
-      mealValue: "",
-      username: "",
-      amount: ""
-    });
   };
 
   renderForm = () => {
@@ -52,6 +51,7 @@ class List extends Component {
 
   renderToDo() {
     const { data } = this.props;
+    console.log("rendertofo", this.props);
     const orders = _.map(data, (value, key) => {
       return <FoodItem key={key} orderId={key} order={value} />;
     });
@@ -91,13 +91,14 @@ class List extends Component {
         </div>
 
         <div className="to-do-list-container">
-          <div className="row">
+          <div className="row to-do-sub-container">
             {this.renderToDo()}
             {
               <Modal
                 formValue={mealValue}
                 handledEvent={this.inputChange}
                 handledModalDismissed={this.addedFormDismissed}
+                submitOrder={this.formSubmit}
               />
             }
           </div>
